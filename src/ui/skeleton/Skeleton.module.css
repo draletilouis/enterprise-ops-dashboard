@@ -1,0 +1,45 @@
+.skeleton {
+  background-color: #e5e7eb;
+  background-image: linear-gradient(
+    90deg,
+    #e5e7eb 0%,
+    #f3f4f6 40%,
+    #f3f4f6 60%,
+    #e5e7eb 100%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  user-select: none;
+  overflow: hidden;
+}
+
+.animate {
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate {
+    animation: none;
+  }
+}
+
+.text {
+  border-radius: 4px;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.rectangle {
+  border-radius: 4px;
+}
