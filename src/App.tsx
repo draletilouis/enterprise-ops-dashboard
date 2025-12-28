@@ -1,107 +1,116 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from './ui/';
-import {
-  SkeletonText,
-  SkeletonCircle,
-  SkeletonRectangle,
-  SkeletonCard,
-} from './ui/skeleton';
-import { ToastContainer } from './ui/toast';
+import { Table, useTableSort, type Column } from './ui/table';
+import { ToastContainer, toast } from './ui/toast';
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  status: 'active' | 'inactive';
+  joinDate: string;
+}
+
+const users: User[] = [
+  { id: 1, name: 'John Smith', email: 'john@example.com', role: 'Admin', status: 'active', joinDate: '2023-01-15' },
+  { id: 2, name: 'Jane Doe', email: 'jane@example.com', role: 'User', status: 'active', joinDate: '2023-03-22' },
+  { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'Editor', status: 'inactive', joinDate: '2022-11-08' },
+  { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'User', status: 'active', joinDate: '2023-06-01' },
+  { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', role: 'Admin', status: 'active', joinDate: '2022-08-30' },
+];
+
+const columns: Column<User>[] = [
+  {
+    key: 'name',
+    header: 'Name',
+    sortable: true,
+  },
+  {
+    key: 'email',
+    header: 'Email',
+    sortable: true,
+  },
+  {
+    key: 'role',
+    header: 'Role',
+    sortable: true,
+    width: 100,
+  },
+  {
+    key: 'status',
+    header: 'Status',
+    sortable: true,
+    width: 100,
+    render: (value) => (
+      <span
+        style={{
+          padding: '0.25rem 0.5rem',
+          borderRadius: '9999px',
+          fontSize: '0.75rem',
+          fontWeight: 500,
+          backgroundColor: value === 'active' ? '#dcfce7' : '#fee2e2',
+          color: value === 'active' ? '#166534' : '#991b1b',
+        }}
+      >
+        {value === 'active' ? 'Active' : 'Inactive'}
+      </span>
+    ),
+  },
+  {
+    key: 'joinDate',
+    header: 'Join Date',
+    sortable: true,
+    width: 120,
+    render: (value) => new Date(value as string).toLocaleDateString(),
+  },
+  {
+    key: 'actions',
+    header: 'Actions',
+    width: 100,
+    align: 'center',
+    render: (_, row) => (
+      <Button
+        size="sm"
+        variant="ghost"
+        onClick={(e) => {
+          e.stopPropagation();
+          toast.info(`Editing ${row.name}`);
+        }}
+      >
+        Edit
+      </Button>
+    ),
+  },
+];
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const { sortedData, sortState, handleSort } = useTableSort(users);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
+  const simulateLoading = () => {
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 2000);
+  };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '600px' }}>
-      <h1 style={{ marginBottom: '1.5rem' }}>Skeleton Component Test</h1>
+    <div style={{ padding: '2rem' }}>
+      <h1 style={{ marginBottom: '1.5rem' }}>Table Component Test</h1>
 
-      <Button
-        onClick={() => setIsLoading(true)}
-        style={{ marginBottom: '1.5rem' }}
-      >
-        Reload (3s loading)
-      </Button>
+      <div style={{ marginBottom: '1rem', display: 'flex', gap: '0.5rem' }}>
+        <Button onClick={simulateLoading}>Simulate Loading</Button>
+      </div>
 
-      <section style={{ marginBottom: '2rem' }}>
-        <h2 style={{ marginBottom: '1rem' }}>Skeleton Primitives</h2>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div>
-            <p style={{ marginBottom: '0.5rem', color: '#6b7280' }}>
-              Text lines:
-            </p>
-            <SkeletonText width="100%" />
-            <div style={{ height: '0.5rem' }} />
-            <SkeletonText width="80%" />
-            <div style={{ height: '0.5rem' }} />
-            <SkeletonText width="60%" />
-          </div>
-
-          <div>
-            <p style={{ marginBottom: '0.5rem', color: '#6b7280' }}>Circles:</p>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <SkeletonCircle size={32} />
-              <SkeletonCircle size={48} />
-              <SkeletonCircle size={64} />
-            </div>
-          </div>
-
-          <div>
-            <p style={{ marginBottom: '0.5rem', color: '#6b7280' }}>
-              Rectangles:
-            </p>
-            <SkeletonRectangle width="100%" height={120} borderRadius={8} />
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2 style={{ marginBottom: '1rem' }}>User Card Example</h2>
-
-        {isLoading ? (
-          <SkeletonCard />
-        ) : (
-          <div
-            style={{
-              padding: '1rem',
-              border: '1px solid #e5e7eb',
-              borderRadius: '0.5rem',
-              backgroundColor: '#ffffff',
-            }}
-          >
-            <div
-              style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
-            >
-              <img
-                src="https://i.pravatar.cc/48"
-                alt="User avatar"
-                style={{ width: 48, height: 48, borderRadius: '50%' }}
-              />
-              <div>
-                <div style={{ fontWeight: 600 }}>Jane Smith</div>
-                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
-                  Product Designer
-                </div>
-              </div>
-            </div>
-
-            <p style={{ marginTop: '1rem', fontSize: '0.875rem' }}>
-              Jane has been with the team for 3 years and specializes in user
-              research and interaction design. She loves creating intuitive
-              experiences.
-            </p>
-
-            <Button size="sm" style={{ marginTop: '1rem' }}>
-              View Profile
-            </Button>
-          </div>
-        )}
-      </section>
+      <Table<User>
+        data={sortedData}
+        columns={columns}
+        rowKey="id"
+        sortState={sortState}
+        onSort={handleSort}
+        isLoading={isLoading}
+        striped
+        onRowClick={(row) => toast.success(`Clicked: ${row.name}`)}
+      />
 
       <ToastContainer position="top-right" />
     </div>
