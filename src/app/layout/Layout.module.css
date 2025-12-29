@@ -1,5 +1,27 @@
 /* ==================== APP LAYOUT ==================== */
 
+.appLayout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.appMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-left: 260px;
+  transition: margin-left 200ms ease;
+}
+
+.appContent {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+/* Legacy class names for backwards compatibility */
 .layout {
   display: flex;
   min-height: 100vh;
@@ -28,6 +50,11 @@
   display: flex;
   flex-direction: column;
   transition: width 200ms ease;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
 }
 
 .sidebarCollapsed {
