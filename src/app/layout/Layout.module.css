@@ -15,6 +15,10 @@
   transition: margin-left 200ms ease;
 }
 
+.appMainCollapsed {
+  margin-left: 72px;
+}
+
 .appContent {
   flex: 1;
   padding: 1.5rem;

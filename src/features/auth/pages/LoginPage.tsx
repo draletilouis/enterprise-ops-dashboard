@@ -1,54 +1,68 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../../store/auth.store';
-import { Button } from '../../../ui';
+import { Button, Input } from '../../../ui';
 import './LoginPage.css';
 
-export const LoginPage: React.FC = () => {
+export function LoginPage() {
+  const navigate = useNavigate();
+  const { signIn, isLoading } = useAuthStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login, isLoading } = useAuthStore();
-  const navigate = useNavigate();
-  
+  const [error, setError] = useState('');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await login(email, password);
-    navigate('/dashboard');
+    setError('');
+
+    if (!email || !password) {
+      setError('Please fill in all fields');
+      return;
+    }
+
+    try {
+      console.log('Attempting to sign in with:', email);
+      await signIn(email, password);
+      console.log('Sign in successful, navigating to dashboard');
+      navigate('/dashboard');
+    } catch (err) {
+      console.error('Sign in error:', err);
+      const errorMessage = err instanceof Error ? err.message : 'Invalid email or password';
+      setError(errorMessage);
+    }
   };
-  
+
   return (
     <div className="login-page">
       <div className="login-card">
-        <h1 className="login-title">OpsPortal</h1>
-        <p className="login-subtitle">Sign in to your account</p>
-        
+        <div className="login-header">
+          <h1 className="login-title">Welcome back</h1>
+          <p className="login-subtitle">Sign in to your account</p>
+        </div>
+
         <form onSubmit={handleSubmit} className="login-form">
-          <div className="login-field">
-            <label className="login-label">Email</label>
-            <input
-              type="email"
-              className="login-input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          
-          <div className="login-field">
-            <label className="login-label">Password</label>
-            <input
-              type="password"
-              className="login-input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          
-          <Button 
-            type="submit" 
-            variant="primary" 
-            size="lg"
+          {error && (
+            <div className="error-alert">{error}</div>
+          )}
+
+          <Input
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@company.com"
+          />
+
+          <Input
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+          />
+
+          <Button
+            type="submit"
             isLoading={isLoading}
             style={{ width: '100%' }}
           >
@@ -58,4 +72,6 @@ export const LoginPage: React.FC = () => {
       </div>
     </div>
   );
-};
+}
+
+LoginPage.displayName = 'LoginPage';

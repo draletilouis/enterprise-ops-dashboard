@@ -64,6 +64,13 @@ export function AppLayout() {
     return currentItem?.label || 'Dashboard';
   };
 
+  const mainClasses = [
+    styles.appMain,
+    collapsed && styles.appMainCollapsed,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
     <div className={styles.appLayout}>
       <Sidebar
@@ -73,7 +80,7 @@ export function AppLayout() {
         collapsed={collapsed}
         onToggleCollapse={handleToggleCollapse}
       />
-      <div className={styles.appMain}>
+      <div className={mainClasses}>
         <Topbar
           title={getPageTitle()}
           userName={user?.name}
