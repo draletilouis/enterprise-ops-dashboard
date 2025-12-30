@@ -5,6 +5,8 @@ import {
   OrdersChart,
   type ActivityItem,
 } from '../components';
+import { useDashboardStats } from '../hooks';
+import { SkeletonCard } from '../../../ui/skeleton';
 import styles from '../components/Dashboard.module.css';
 
 const activities: ActivityItem[] = [
@@ -84,34 +86,57 @@ const GrowthIcon = () => (
 );
 
 export function DashboardPage() {
+  const stats = useDashboardStats();
+
+  if (stats.isLoading) {
+    return (
+      <div>
+        <div className={styles.statsGrid}>
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+        </div>
+      </div>
+    );
+  }
+
+  if (stats.error) {
+    return (
+      <div style={{ padding: '2rem', textAlign: 'center' }}>
+        <p style={{ color: '#dc2626' }}>Error loading dashboard: {stats.error}</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       {/* Stats Cards */}
       <div className={styles.statsGrid}>
         <StatsCard
           title="Total Users"
-          value="12,458"
+          value={stats.totalUsers.toLocaleString()}
           change={{ value: 12, type: 'increase' }}
           icon={<UsersIcon />}
           iconColor="blue"
         />
         <StatsCard
           title="Revenue"
-          value="$48,352"
+          value={`$${stats.totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
           change={{ value: 8, type: 'increase' }}
           icon={<RevenueIcon />}
           iconColor="green"
         />
         <StatsCard
           title="Orders"
-          value="1,245"
+          value={stats.totalOrders.toLocaleString()}
           change={{ value: 3, type: 'decrease' }}
           icon={<OrdersIcon />}
           iconColor="purple"
         />
         <StatsCard
           title="Growth"
-          value="23.5%"
+          value={`${stats.growth}%`}
           change={{ value: 5, type: 'increase' }}
           icon={<GrowthIcon />}
           iconColor="orange"

@@ -2,11 +2,16 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../../store/auth.store';
 import { Button, Input } from '../../../ui';
-import './LoginPage.css';
+import styles from './Auth.module.css';
 
-export function LoginPage() {
+interface LoginPageProps {
+  onSwitchToSignUp: () => void;
+}
+
+export function LoginPage({ onSwitchToSignUp }: LoginPageProps) {
   const navigate = useNavigate();
-  const { signIn, isLoading } = useAuthStore();
+  const signIn = useAuthStore((state) => state.signIn);
+  const isLoading = useAuthStore((state) => state.isLoading);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -21,9 +26,8 @@ export function LoginPage() {
     }
 
     try {
-      console.log('Attempting to sign in with:', email);
       await signIn(email, password);
-      console.log('Sign in successful, navigating to dashboard');
+      // Navigate to dashboard after successful login
       navigate('/dashboard');
     } catch (err) {
       console.error('Sign in error:', err);
@@ -33,16 +37,32 @@ export function LoginPage() {
   };
 
   return (
-    <div className="login-page">
-      <div className="login-card">
-        <div className="login-header">
-          <h1 className="login-title">Welcome back</h1>
-          <p className="login-subtitle">Sign in to your account</p>
+    <div className={styles.authContainer}>
+      <div className={styles.authCard}>
+        <div className={styles.authHeader}>
+          <div className={styles.logo}>
+            <div className={styles.logoIcon}>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+              >
+                <path d="M3 3h14v14H3z" />
+                <path d="M3 9h14M9 3v14" />
+              </svg>
+            </div>
+            <span className={styles.logoText}>Enterprise</span>
+          </div>
+          <h1 className={styles.authTitle}>Welcome back</h1>
+          <p className={styles.authSubtitle}>Sign in to your account</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="login-form">
+        <form onSubmit={handleSubmit} className={styles.authForm}>
           {error && (
-            <div className="error-alert">{error}</div>
+            <div className={styles.errorAlert}>{error}</div>
           )}
 
           <Input
@@ -61,14 +81,23 @@ export function LoginPage() {
             placeholder="Enter your password"
           />
 
-          <Button
-            type="submit"
-            isLoading={isLoading}
-            style={{ width: '100%' }}
-          >
+          <Button type="submit" isLoading={isLoading} style={{ width: '100%' }}>
             Sign In
           </Button>
         </form>
+
+        <div className={styles.authFooter}>
+          <p>
+            Don't have an account?{' '}
+            <button
+              type="button"
+              className={styles.linkButton}
+              onClick={onSwitchToSignUp}
+            >
+              Sign up
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );

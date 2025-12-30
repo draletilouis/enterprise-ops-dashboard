@@ -138,7 +138,7 @@ export function SignUpPage({ onSwitchToLogin }: SignUpPageProps) {
             placeholder="Confirm your password"
           />
 
-          <Button type="submit" fullWidth isLoading={isLoading}>
+          <Button type="submit" isLoading={isLoading} style={{ width: '100%' }}>
             Create Account
           </Button>
         </form>

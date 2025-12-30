@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useAuthStore } from './store/authStore';
-import { Sidebar, Topbar, DashboardIcon, UsersIcon, DataIcon, SettingsIcon, ReportsIcon, NavItem } from './app/layout';
+import { useAuthStore } from './store/auth.store';
+import { Sidebar, Topbar, DashboardIcon, UsersIcon, DataIcon, SettingsIcon, ReportsIcon } from './app/layout';
+import type { NavItem } from './app/layout';
 import { DashboardPage } from './features/dashboard';
 import { UsersPage } from './features/users';
 import { DataExplorerPage } from './features/data-explorer';
 import { LoginPage, SignUpPage } from './features/auth';
+import { SettingsPage } from './features/settings';
 import { ToastContainer, toast } from './ui/toast';
 import { SkeletonCard } from './ui/skeleton';
 
@@ -17,7 +19,14 @@ const navItems: NavItem[] = [
 ];
 
 function App() {
-  const { user, profile, isInitialized, initialize, signOut } = useAuthStore();
+  console.log('App component rendering');
+  const user = useAuthStore((state) => state.user);
+  console.log('App: user from store:', user);
+  const profile = useAuthStore((state) => state.profile);
+  const isInitialized = useAuthStore((state) => state.isInitialized);
+  const initialize = useAuthStore((state) => state.initialize);
+  const signOut = useAuthStore((state) => state.signOut);
+
   const [currentPath, setCurrentPath] = useState('/dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [authView, setAuthView] = useState<'login' | 'signup'>('login');
@@ -25,6 +34,24 @@ function App() {
   useEffect(() => {
     initialize();
   }, [initialize]);
+
+  // Debug: Direct store subscription to verify reactivity
+  useEffect(() => {
+    console.log('App.tsx: Setting up direct store subscription');
+    const unsubscribe = useAuthStore.subscribe((state) => {
+      console.log('App.tsx: Store state changed (direct subscription):', {
+        hasUser: !!state.user,
+        isAuthenticated: state.isAuthenticated,
+        isInitialized: state.isInitialized,
+      });
+    });
+    return unsubscribe;
+  }, []);
+
+  // Debug: Log when user state changes
+  useEffect(() => {
+    console.log('App.tsx: User state changed (useEffect):', { user: !!user, isInitialized });
+  }, [user, isInitialized]);
 
   const currentNavItem = navItems.find((item) => item.path === currentPath);
   const pageTitle = currentNavItem?.label || 'Dashboard';
@@ -87,11 +114,7 @@ function App() {
               Reports Page (Coming Soon)
             </div>
           )}
-          {currentPath === '/settings' && (
-            <div style={{ padding: '2rem', textAlign: 'center', color: '#6b7280' }}>
-              Settings Page (Coming Soon)
-            </div>
-          )}
+          {currentPath === '/settings' && <SettingsPage />}
         </main>
       </div>
 

@@ -84,14 +84,18 @@ export const profilesService = {
   },
 
   async update(id: string, updates: ProfileUpdate): Promise<Profile> {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase
       .from('profiles')
-      .update({ ...updates, updated_at: new Date().toISOString() })
+      .update({
+        ...updates,
+        updated_at: new Date().toISOString(),
+      })
       .eq('id', id)
       .select()
-      .single();
+      .single() as Promise<{ data: Profile | null; error: any }>);
 
     if (error) throw error;
+    if (!data) throw new Error('No data returned');
     return data;
   },
 

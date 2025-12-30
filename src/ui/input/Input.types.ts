@@ -1,9 +1,9 @@
-import type { HtmlHTMLAttributes } from "react";
+import type { InputHTMLAttributes } from "react";
 
-export interface InputProps extends HtmlHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   helperText?: string;
   error?: string;
   isSuccess?: boolean;
-  fullWidth?: boolean;  
+  fullWidth?: boolean;
 }

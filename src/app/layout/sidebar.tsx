@@ -34,7 +34,7 @@ export function Sidebar({
               <path d="M3 9h14M9 3v14" />
             </svg>
           </div>
-          {!collapsed && <span className={styles.logoText}>Enterprise</span>}
+          {!collapsed && <span className={styles.logoText}>Dralui Labs</span>}
         </div>
 
         {onToggleCollapse && (
@@ -83,7 +83,7 @@ export function Sidebar({
               onClick={() => onNavigate(item.path)}
               title={collapsed ? item.label : undefined}
             >
-              <span className={styles.navIcon}>{item.icon}</span>
+              {item.icon && <span className={styles.navIcon}>{item.icon}</span>}
               {!collapsed && <span className={styles.navLabel}>{item.label}</span>}
             </button>
           );

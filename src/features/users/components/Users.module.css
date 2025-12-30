@@ -1,0 +1,232 @@
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pageTitle {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.filters {
+  margin-bottom: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  padding: 1rem;
+}
+
+.filtersRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.searchWrapper,
+.selectWrapper {
+  min-width: 150px;
+}
+
+.select {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.select:hover {
+  border-color: #9ca3af;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.tableContainer {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+
+.userCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.userAvatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.userAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.userAvatarFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.userName {
+  font-weight: 600;
+  color: #111827;
+}
+
+.userEmail {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badgeActive {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.badgeInactive {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.badgePending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badgeAdmin {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.badgeEditor {
+  background-color: #e0e7ff;
+  color: #4338ca;
+}
+
+.badgeViewer {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.selectLabel {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  background-color: #ffffff;
+}
+
+.paginationInfo {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.paginationButtons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.paginationText {
+  font-size: 0.875rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .filtersRow {
+    flex-direction: column;
+  }
+
+  .searchWrapper,
+  .selectWrapper {
+    width: 100%;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .paginationButtons {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

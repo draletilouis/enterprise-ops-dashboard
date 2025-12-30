@@ -34,8 +34,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   error: null,
 
   initialize: async () => {
+    console.log('Auth store: Initialize called');
     try {
       const session = await authService.getCurrentSession();
+      console.log('Auth store: Got session:', !!session);
 
       if (session?.user) {
         const profile = await profilesService.getById(session.user.id);
@@ -46,23 +48,15 @@ export const useAuthStore = create<AuthState>((set, get) => ({
           isAuthenticated: true,
           isInitialized: true,
         });
+        console.log('Auth store: Initialized with existing session');
       } else {
         set({ isInitialized: true, isAuthenticated: false });
+        console.log('Auth store: Initialized without session');
       }
     } catch (error) {
       console.error('Failed to initialize auth:', error);
       set({ isInitialized: true, isAuthenticated: false });
     }
-
-    // Listen for auth changes
-    authService.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_IN' && session?.user) {
-        const profile = await profilesService.getById(session.user.id);
-        set({ user: session.user, session: session as Session, profile, isAuthenticated: true });
-      } else if (event === 'SIGNED_OUT') {
-        set({ user: null, session: null, profile: null, isAuthenticated: false });
-      }
-    });
   },
 
   signIn: async (email, password) => {
@@ -73,16 +67,51 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       const { user, session } = await authService.signIn({ email, password });
       console.log('Auth store: Sign in successful', { userId: user?.id });
 
-      if (user) {
+      if (user && session) {
         try {
           console.log('Auth store: Fetching profile for user', user.id);
           const profile = await profilesService.getById(user.id);
           console.log('Auth store: Profile fetched', profile);
-          set({ user, session, profile, isAuthenticated: true, isLoading: false });
+
+          // Update state with all fields at once
+          const newState = {
+            user,
+            session,
+            profile,
+            isAuthenticated: true,
+            isLoading: false,
+            error: null,
+          };
+
+          console.log('Auth store: About to set state with:', {
+            hasUser: !!newState.user,
+            hasSession: !!newState.session,
+            hasProfile: !!newState.profile,
+            isAuthenticated: newState.isAuthenticated,
+          });
+
+          set(newState);
+
+          console.log('Auth store: State set complete');
+
+          // Verify state was actually updated
+          setTimeout(() => {
+            const currentState = get();
+            console.log('Auth store: State verification after 100ms:', {
+              hasUser: !!currentState.user,
+              isAuthenticated: currentState.isAuthenticated,
+            });
+          }, 100);
         } catch (profileError) {
           console.warn('Auth store: Profile fetch failed, continuing without profile', profileError);
-          // Continue without profile - it might not exist yet
-          set({ user, session, profile: null, isAuthenticated: true, isLoading: false });
+          set({
+            user,
+            session,
+            profile: null,
+            isAuthenticated: true,
+            isLoading: false,
+            error: null,
+          });
         }
       }
     } catch (error) {

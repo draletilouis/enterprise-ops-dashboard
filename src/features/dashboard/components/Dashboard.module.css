@@ -2,16 +2,16 @@
 
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .statsCard {
   background-color: #ffffff;
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
 .statsHeader {
@@ -22,17 +22,17 @@
 }
 
 .statsIcon {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .statsIcon svg {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .statsIcon.blue {
@@ -73,14 +73,14 @@
 }
 
 .statsValue {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: #111827;
   margin-bottom: 0.25rem;
 }
 
 .statsTitle {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: #6b7280;
 }
 
@@ -88,20 +88,20 @@
 
 .chartsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .chartCard {
   background-color: #ffffff;
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
 .chartTitle {
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: #111827;
   margin-bottom: 1rem;
@@ -109,7 +109,7 @@
 
 .chartContainer {
   width: 100%;
-  height: 300px;
+  height: 280px;
 }
 
 /* ==================== ACTIVITY FEED ==================== */

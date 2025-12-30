@@ -43,15 +43,16 @@ const navItems: NavItem[] = [
 export function AppLayout() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, logout } = useAuthStore();
+  const profile = useAuthStore((state) => state.profile);
+  const signOut = useAuthStore((state) => state.signOut);
   const [collapsed, setCollapsed] = useState(false);
 
   const handleNavigate = (path: string) => {
     navigate(path);
   };
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await signOut();
     navigate('/login');
   };
 
@@ -83,7 +84,8 @@ export function AppLayout() {
       <div className={mainClasses}>
         <Topbar
           title={getPageTitle()}
-          userName={user?.name}
+          userName={profile ? `${profile.first_name} ${profile.last_name}` : 'User'}
+          userAvatar={profile?.avatar_url || undefined}
           onLogout={handleLogout}
         />
         <main className={styles.appContent}>

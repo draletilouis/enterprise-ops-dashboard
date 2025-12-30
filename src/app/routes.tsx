@@ -7,14 +7,14 @@ import { LoginPage } from '../features/auth/pages/LoginPage';
 
 // Features
 import { DashboardPage } from '../features/dashboard/pages/DashboardPage';
-import { TransactionsPage } from '../features/auth/pages/TransactionsPage';
-import { UsersPage } from '../features/auth/pages/UsersPage';
-import { SettingsPage } from '../features/auth/pages/SettingsPage';
+import { TransactionsPage } from '../features/dashboard/pages/TransactionsPage';
+import { UsersPage } from '../features/users/pages/UsersPage';
+import { SettingsPage } from '../features/settings/pages/SettingsPage';
 
 export const router = createBrowserRouter([
   {
     path: '/login',
-    element: <LoginPage />,
+    element: <LoginPage onSwitchToSignUp={() => {}} />,
   },
   {
     path: '/',
@@ -39,6 +39,14 @@ export const router = createBrowserRouter([
       {
         path: 'users',
         element: <UsersPage />,
+      },
+      {
+        path: 'reports',
+        element: (
+          <div style={{ padding: '2rem', textAlign: 'center', color: '#6b7280' }}>
+            Reports Page (Coming Soon)
+          </div>
+        ),
       },
       {
         path: 'settings',

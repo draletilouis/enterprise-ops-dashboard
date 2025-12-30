@@ -3,7 +3,7 @@ import styles from './Layout.module.css';
 
 export function Topbar({
   title,
-  userName = 'John Doe',
+  userName = 'Draleti Louis',
   userAvatar,
   onLogout,
 }: TopbarProps) {

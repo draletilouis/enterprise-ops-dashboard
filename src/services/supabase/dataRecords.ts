@@ -104,7 +104,7 @@ export const dataRecordsService = {
 
     if (error) throw error;
 
-    const records = data || [];
+    const records: DataRecord[] = data || [];
 
     // Calculate totals
     const totalRevenue = records.reduce((sum, r) => sum + Number(r.revenue), 0);
