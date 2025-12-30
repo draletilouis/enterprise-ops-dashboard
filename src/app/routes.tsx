@@ -1,9 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { AppLayout } from './layout';
 import { ProtectedRoute } from './ProtectedRoute';
-
-// Auth
-import { LoginPage } from '../features/auth/pages/LoginPage';
+import { AuthPage } from '../features/auth/pages/AuthPage';
 
 // Features
 import { DashboardPage } from '../features/dashboard/pages/DashboardPage';
@@ -14,7 +12,11 @@ import { SettingsPage } from '../features/settings/pages/SettingsPage';
 export const router = createBrowserRouter([
   {
     path: '/login',
-    element: <LoginPage onSwitchToSignUp={() => {}} />,
+    element: <AuthPage />,
+  },
+  {
+    path: '/signup',
+    element: <AuthPage defaultTab="signup" />,
   },
   {
     path: '/',

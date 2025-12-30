@@ -1,24 +1,22 @@
 import { useState } from 'react';
-import { useDataExplorer } from '../hooks';
+import { useDataExplorer } from '../../data-explorer/hooks/useDataExplorer';
 import { Table, SkeletonCard } from '../../../ui';
 import type { DataFilters } from '../../../services/supabase';
 
 export function TransactionsPage() {
   const {
-    data,
+    records: data,
     isLoading,
     error,
-    page,
-    totalPages,
-    totalRecords,
+    pagination,
     filters,
     categories,
     regions,
     setPage,
     setFilters,
-    clearFilters,
-    exportToCSV,
   } = useDataExplorer();
+
+  const { page, totalPages, total: totalRecords } = pagination;
 
   const [localFilters, setLocalFilters] = useState<DataFilters>(filters);
 
@@ -28,7 +26,37 @@ export function TransactionsPage() {
 
   const handleClearFilters = () => {
     setLocalFilters({});
-    clearFilters();
+    setFilters({});
+  };
+
+  const exportToCSV = () => {
+    if (!data || data.length === 0) return;
+
+    const headers = ['ID', 'Category', 'Product', 'Region', 'Sales', 'Revenue', 'Profit', 'Date', 'Quarter'];
+    const csvContent = [
+      headers.join(','),
+      ...data.map(record =>
+        [
+          record.id,
+          record.category,
+          record.product,
+          record.region,
+          record.sales,
+          record.revenue,
+          record.profit,
+          record.record_date,
+          record.quarter,
+        ].join(',')
+      ),
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `transactions-${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   if (isLoading) {
