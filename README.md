@@ -1,38 +1,62 @@
-# Enterprise Operations & Analytics Platform
+# Stratify — Enterprise Operations Platform
 
-A production-grade internal dashboard application demonstrating advanced frontend engineering skills. Features a custom design system, real-time analytics with Supabase backend, advanced data tables with filtering and export capabilities, and complete authentication with role-based access control.
+A production-grade internal dashboard application built with Google's Material Design 3. Features a professional design system, real-time analytics with Supabase backend, advanced data management capabilities, and complete authentication with role-based access control.
 
-**Built with:** React 18, TypeScript, Vite, Zustand, Supabase, React Router
+**Built with:** React 19, TypeScript, Vite, Zustand, Supabase, React Router, Material Design 3
+
+## Design System
+
+### Google Material Design 3
+- **Typography**: Google Sans / Product Sans / Roboto font family
+- **Color Palette**: Google's signature colors (Google Blue #1A73E8, etc.)
+- **Elevation**: Material Design 3 shadow system
+- **Motion**: Material motion curves (cubic-bezier 0.4, 0, 0.2, 1)
+- **Components**: Pills, cards, and surfaces with proper elevation
+- **Spacing**: Google's 8px grid system (8px, 16px, 24px)
+
+### Professional UI Components
+- Clean, minimalist interface inspired by Google Workspace
+- Pill-shaped navigation items with smooth hover states
+- Elevated cards with subtle Material shadows
+- Professional user dropdown menu
+- Responsive sidebar with collapsible states
+- Modern scrollbars with Google's subtle design
 
 ## Key Features
 
 ### Authentication & Security
 - Complete Supabase authentication (login/signup)
+- Professional user dropdown menu with Settings and Sign out
 - Protected routes with automatic redirection
 - Row Level Security (RLS) policies
-- User profile management
 - Secure session handling
+- User profile management
 
 ### Dashboard & Analytics
-- Real-time business metrics (users, revenue, sales)
-- Growth rate monitoring
-- Interactive stat cards with loading states
-- Data aggregation and analytics
+- Real-time business metrics dashboard
+- Interactive stat cards with growth indicators
+- Recharts integration for data visualization
+- Activity feed with user interactions
+- Compact, information-dense layout
+- Material Design card elevation
 
 ### Data Management
 - **Transactions Page**: Advanced data explorer with multi-field filtering
 - **Users Page**: Complete user management interface
 - **Settings Page**: Profile editing capabilities
+- **Reports Page**: Analytics placeholder
 - CSV export functionality
-- Pagination and data virtualization
-- Table sorting and filtering
+- Pagination and table sorting
+- Multi-field filtering system
 
 ### UI/UX Components
-- Custom design system with modular CSS
-- Responsive sidebar navigation
-- Modal dialogs for editing
+- Material Design 3 design system
+- Responsive sidebar navigation (280px standard, 72px collapsed)
+- Professional topbar (64px height)
+- Modal dialogs with proper elevation
 - Toast notifications
 - Loading skeletons
+- Custom button and input components
 - Professional table components
 
 ## Project Structure
@@ -45,7 +69,7 @@ src/
 │   └── ProtectedRoute.tsx
 ├── features/
 │   ├── auth/            # Login, SignUp pages
-│   ├── dashboard/       # Dashboard with stats
+│   ├── dashboard/       # Dashboard with stats & charts
 │   ├── data-explorer/   # Data filtering & CSV export
 │   ├── settings/        # Profile settings
 │   └── users/           # User management
@@ -53,13 +77,16 @@ src/
 │   └── supabase/        # Supabase services & types
 ├── store/
 │   └── auth.store.ts    # Zustand auth state
+├── styles/
+│   ├── global.css       # Global Material Design styles
+│   └── theme.ts         # Material Design theme tokens
 ├── ui/                  # Reusable components
-│   ├── button/
-│   ├── input/
-│   ├── modal/
-│   ├── skeleton/
-│   ├── table/
-│   └── toast/
+│   ├── button/          # Material Design buttons
+│   ├── input/           # Material Design inputs
+│   ├── modal/           # Elevated modal dialogs
+│   ├── skeleton/        # Loading skeletons
+│   ├── table/           # Professional tables
+│   └── toast/           # Toast notifications
 └── main.tsx             # App entry point
 ```
 
@@ -67,11 +94,13 @@ src/
 
 | Category | Technologies |
 |----------|-------------|
-| **Frontend** | React 18, TypeScript, Vite |
-| **State Management** | Zustand |
-| **Routing** | React Router v6 |
+| **Frontend** | React 19.2.0, TypeScript 5.8.0, Vite 6.0.6 |
+| **State Management** | Zustand 5.0.3 |
+| **Routing** | React Router v7.1.3 |
 | **Backend** | Supabase (PostgreSQL, Auth, RLS) |
+| **Design System** | Google Material Design 3 |
 | **Styling** | CSS Modules |
+| **Charts** | Recharts 2.15.1 |
 | **Build Tool** | Vite |
 
 ## Prerequisites
@@ -83,7 +112,7 @@ src/
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/draletilouis/enterprise-ops-dashboard.git
    cd enterprise-ops-platform
    ```
 
@@ -162,17 +191,24 @@ npm run lint       # Run ESLint
 1. **Sign Up**: Create account with email, password, name, and department
 2. **Login**: Access dashboard with credentials
 3. **Auto Profile Creation**: Profile automatically created via database trigger
-4. **Logout**: Secure session termination
+4. **User Menu**: Access Settings and Sign out from avatar dropdown
+5. **Logout**: Secure session termination
 
 ### Navigation
 
 | Page | Route | Description |
 |------|-------|-------------|
-| Dashboard | `/dashboard` | Business metrics and KPIs |
-| Transactions | `/transactions` | Data explorer with filters |
+| Dashboard | `/dashboard` | Business metrics, charts, and activity feed |
+| Transactions | `/transactions` | Data explorer with multi-field filters |
 | Users | `/users` | User management interface |
-| Reports | `/reports` | Placeholder for analytics |
-| Settings | `/settings` | Profile editing |
+| Reports | `/reports` | Analytics reports (placeholder) |
+| Settings | `/settings` | Profile editing and preferences |
+
+### Professional User Menu
+
+Click your avatar in the top-right to access:
+- **Settings**: Navigate to profile settings
+- **Sign out**: Secure logout
 
 ### Data Filtering (Transactions Page)
 
@@ -207,6 +243,7 @@ All tables protected with Supabase RLS:
 - Anon keys for client-side operations
 - Service role keys only in secure environments
 - SQL injection protection via prepared statements
+- Secure session handling with Supabase Auth
 
 ## Troubleshooting
 
@@ -233,16 +270,45 @@ All tables protected with Supabase RLS:
 3. Update routes in `src/app/routes.tsx`
 4. Add navigation in `src/app/layout/AppLayout.tsx`
 
-### Styling Guide
+### Material Design Styling Guide
 
-Use CSS Modules for component styles:
+Use CSS Modules with Material Design tokens:
 
 ```tsx
 import styles from './MyComponent.module.css';
 
 export function MyComponent() {
-  return <div className={styles.container}>Content</div>;
+  return (
+    <div className={styles.container}>
+      <button className={styles.materialButton}>
+        Click me
+      </button>
+    </div>
+  );
 }
+```
+
+### Material Design 3 Tokens
+
+```css
+/* Colors */
+--google-blue: #1A73E8;
+--google-green: #34A853;
+--google-red: #EA4335;
+--google-yellow: #FBBC04;
+
+/* Typography */
+font-family: "Google Sans", "Product Sans", "Roboto", sans-serif;
+
+/* Shadows (Material Design elevation) */
+box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+            0 1px 3px 1px rgba(60, 64, 67, 0.15);
+
+/* Motion */
+transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+/* Spacing (8px grid) */
+padding: 8px, 16px, 24px;
 ```
 
 ## Performance Optimizations
@@ -253,6 +319,7 @@ export function MyComponent() {
 - Route-based code splitting
 - CSS Modules for efficient styling
 - Skeleton loading states
+- Optimized Material Design animations
 
 ## Browser Support
 
@@ -276,18 +343,21 @@ MIT License - see LICENSE file for details
 ## Resources
 
 - [React Documentation](https://react.dev/)
+- [Material Design 3](https://m3.material.io/)
 - [Supabase Docs](https://supabase.com/docs)
 - [Zustand](https://github.com/pmndrs/zustand)
 - [React Router](https://reactrouter.com/)
 - [Vite](https://vite.dev/)
+- [Recharts](https://recharts.org/)
 
 ## Topics/Tags
 
 ```
-react typescript dashboard enterprise supabase zustand vite authentication data-visualization css-modules frontend-architecture state-management rls postgres
+react typescript dashboard enterprise supabase zustand vite material-design-3 google-design authentication data-visualization css-modules frontend-architecture state-management rls postgres recharts
 ```
 
 ---
 
 **Version**: 1.0.0
-**Last Updated**: December 2025
+**Last Updated**: January 2026
+**Design System**: Google Material Design 3
