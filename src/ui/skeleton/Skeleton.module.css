@@ -1,11 +1,11 @@
 .skeleton {
-  background-color: #e5e7eb;
+  background-color: #E8E8ED;
   background-image: linear-gradient(
     90deg,
-    #e5e7eb 0%,
-    #f3f4f6 40%,
-    #f3f4f6 60%,
-    #e5e7eb 100%
+    #E8E8ED 0%,
+    #F5F5F7 40%,
+    #F5F5F7 60%,
+    #E8E8ED 100%
   );
   background-size: 200% 100%;
   background-position: 100% 0;
@@ -14,7 +14,7 @@
 }
 
 .animate {
-  animation: shimmer 1.5s ease-in-out infinite;
+  animation: shimmer 1.8s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
 }
 
 @keyframes shimmer {
@@ -33,7 +33,7 @@
 }
 
 .text {
-  border-radius: 4px;
+  border-radius: 0.5rem;
 }
 
 .circle {
@@ -41,5 +41,5 @@
 }
 
 .rectangle {
-  border-radius: 4px;
+  border-radius: 0.75rem;
 }

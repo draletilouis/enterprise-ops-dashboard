@@ -54,7 +54,7 @@ export function LoginPage({ onSwitchToSignUp }: LoginPageProps) {
                 <path d="M3 9h14M9 3v14" />
               </svg>
             </div>
-            <span className={styles.logoText}>Enterprise</span>
+            <span className={styles.logoText}>Stratify</span>
           </div>
           <h1 className={styles.authTitle}>Welcome back</h1>
           <p className={styles.authSubtitle}>Sign in to your account</p>

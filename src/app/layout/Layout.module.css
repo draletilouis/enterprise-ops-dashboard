@@ -1,9 +1,7 @@
-/* ==================== APP LAYOUT ==================== */
-
 .appLayout {
   display: flex;
   min-height: 100vh;
-  background-color: #f9fafb;
+  background-color: #F8F9FA;
 }
 
 .appMain {
@@ -11,8 +9,8 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  margin-left: 260px;
-  transition: margin-left 200ms ease;
+  margin-left: 280px;
+  transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .appMainCollapsed {
@@ -21,15 +19,32 @@
 
 .appContent {
   flex: 1;
-  padding: 1.5rem;
+  padding: 24px;
   overflow-y: auto;
+  max-width: 1920px;
 }
 
-/* Legacy class names for backwards compatibility */
+.appContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.appContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.appContent::-webkit-scrollbar-thumb {
+  background: #DADCE0;
+  border-radius: 4px;
+}
+
+.appContent::-webkit-scrollbar-thumb:hover {
+  background: #BDC1C6;
+}
+
 .layout {
   display: flex;
   min-height: 100vh;
-  background-color: #f9fafb;
+  background-color: #F8F9FA;
 }
 
 .main {
@@ -41,25 +56,40 @@
 
 .content {
   flex: 1;
-  padding: 1.5rem;
+  padding: 24px;
   overflow-y: auto;
 }
 
-/* ==================== SIDEBAR ==================== */
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #DADCE0;
+  border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: #BDC1C6;
+}
 
 .sidebar {
-  width: 260px;
-  background-color: #ffffff;
-  color: #374151;
+  width: 280px;
+  background-color: #FFFFFF;
+  color: #202124;
   display: flex;
   flex-direction: column;
-  transition: width 200ms ease;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: fixed;
   left: 0;
   top: 0;
   height: 100vh;
   z-index: 100;
-  border-right: 1px solid #e5e7eb;
+  border-right: 1px solid #E8EAED;
 }
 
 .sidebarCollapsed {
@@ -69,150 +99,197 @@
 .sidebarHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 1rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1f2937;
-  overflow: hidden;
-}
-
-.logoIcon {
-  width: 2rem;
-  height: 2rem;
-  background: #2563eb;
-  border-radius: 0.375rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  justify-content: flex-start;
+  padding: 16px 24px;
+  height: 64px;
+  border-bottom: 1px solid #E8EAED;
 }
 
 .logoText {
-  white-space: nowrap;
+  font-family: "Google Sans", "Product Sans", "Roboto", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #5F6368;
 }
 
-.collapseButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 0.375rem;
-  color: #6b7280;
-  transition: background-color 150ms ease, color 150ms ease;
-}
-
-.collapseButton:hover {
-  background-color: #f3f4f6;
-  color: #1f2937;
+.logoTextCollapsed {
+  font-family: "Google Sans", "Product Sans", "Roboto", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #1A73E8;
 }
 
 .sidebarNav {
   flex: 1;
-  padding: 1.5rem 1rem;
+  padding: 8px;
   overflow-y: auto;
+}
+
+.sidebarNav::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebarNav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebarNav::-webkit-scrollbar-thumb {
+  background: #DADCE0;
+  border-radius: 4px;
+}
+
+.sidebarNav::-webkit-scrollbar-thumb:hover {
+  background: #BDC1C6;
 }
 
 .navItem {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-radius: 0;
-  color: #6b7280;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  transition: color 150ms ease;
-  margin-bottom: 0.75rem;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 24px;
+  color: #5F6368;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 4px;
   overflow: hidden;
   text-align: left;
   width: 100%;
   background: transparent;
   border: none;
+  cursor: pointer;
+  position: relative;
 }
 
 .navItem:hover {
-  color: #1f2937;
+  background-color: rgba(26, 115, 232, 0.04);
+  color: #202124;
+}
+
+.navItem:active {
+  background-color: rgba(26, 115, 232, 0.1);
 }
 
 .navItemActive {
-  color: #2563eb;
-  font-weight: 500;
+  background-color: rgba(26, 115, 232, 0.12);
+  color: #1A73E8;
+  font-weight: 600;
 }
 
 .navItemActive:hover {
-  color: #1d4ed8;
+  background-color: rgba(26, 115, 232, 0.16);
+}
+
+.sidebarCollapsed .navItem {
+  justify-content: center;
+  padding: 12px;
+  gap: 0;
+  border-radius: 16px;
 }
 
 .navIcon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
+}
+
+.navItemActive .navIcon {
+  color: #1A73E8;
 }
 
 .navLabel {
   white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebarCollapsed .navLabel {
+  opacity: 0;
+  width: 0;
 }
 
 .sidebarFooter {
-  padding: 1rem;
-  border-top: 1px solid #e5e7eb;
+  padding: 16px 24px;
+  border-top: 1px solid #E8EAED;
 }
 
-/* ==================== TOPBAR ==================== */
+.sidebarCollapsed .sidebarFooter {
+  padding: 16px 8px;
+}
 
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1.5rem;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-  height: 40px;
+  padding: 0 24px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E8EAED;
+  height: 64px;
+}
+
+.topbarLeft {
+  display: flex;
+  align-items: center;
 }
 
 .topbarTitle {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #111827;
+  font-family: "Google Sans", "Product Sans", "Roboto", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #202124;
 }
 
 .topbarRight {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 8px;
+}
+
+.divider {
+  width: 1px;
+  height: 32px;
+  background-color: #E8EAED;
+  margin: 0 8px;
 }
 
 .userMenu {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  transition: background-color 150ms ease;
+  gap: 12px;
+  padding: 6px 12px 6px 6px;
+  border-radius: 24px;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .userMenu:hover {
-  background-color: #f3f4f6;
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+.userMenu:active {
+  background-color: rgba(60, 64, 67, 0.12);
 }
 
 .userAvatar {
-  width: 2rem;
-  height: 2rem;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background-color: #e5e7eb;
+  background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0;
 }
 
 .userAvatar img {
@@ -224,31 +301,263 @@
 .userInfo {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .userName {
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 500;
-  color: #111827;
+  letter-spacing: 0.25px;
+  color: #202124;
+  line-height: 1.4;
 }
 
-.userRole {
-  font-size: 0.75rem;
-  color: #6b7280;
-}
-
-.logoutButton {
+.iconButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.5rem;
-  color: #6b7280;
-  transition: background-color 150ms ease, color 150ms ease;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: #5F6368;
+  cursor: pointer;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.logoutButton:hover {
-  background-color: #fee2e2;
-  color: #dc2626;
+.iconButton:hover {
+  background-color: rgba(60, 64, 67, 0.08);
+  color: #202124;
+}
+
+.iconButton:active {
+  background-color: rgba(60, 64, 67, 0.12);
+}
+
+.iconButton:focus-visible {
+  outline: 2px solid #1A73E8;
+  outline-offset: 2px;
+}
+
+.userMenuContainer {
+  position: relative;
+}
+
+.userMenuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+}
+
+.userMenuButton:hover {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+.userMenuButton:active {
+  background-color: rgba(60, 64, 67, 0.12);
+}
+
+.userMenuDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 320px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+  overflow: hidden;
+  z-index: 1000;
+  animation: dropdownFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdownHeader {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  align-items: center;
+}
+
+.dropdownAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0;
+  flex-shrink: 0;
+}
+
+.dropdownAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dropdownUserInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.dropdownUserName {
+  font-family: "Google Sans", "Product Sans", "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #202124;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdownUserEmail {
+  font-size: 14px;
+  letter-spacing: 0.25px;
+  color: #5F6368;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background-color: #E8EAED;
+  margin: 0;
+}
+
+.dropdownMenu {
+  padding: 8px 0;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: #202124;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdownItem svg {
+  width: 20px;
+  height: 20px;
+  color: #5F6368;
+  flex-shrink: 0;
+}
+
+.dropdownItem:hover {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+.dropdownItem:active {
+  background-color: rgba(60, 64, 67, 0.12);
+}
+
+.dropdownItemLogout {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: #202124;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdownItemLogout svg {
+  width: 20px;
+  height: 20px;
+  color: #5F6368;
+  flex-shrink: 0;
+}
+
+.dropdownItemLogout:hover {
+  background-color: rgba(60, 64, 67, 0.08);
+}
+
+.dropdownItemLogout:active {
+  background-color: rgba(60, 64, 67, 0.12);
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 256px;
+  }
+
+  .appMain {
+    margin-left: 256px;
+  }
+
+  .sidebarCollapsed {
+    width: 72px;
+  }
+
+  .appMainCollapsed {
+    margin-left: 72px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 256px;
+  }
+
+  .sidebarVisible {
+    transform: translateX(0);
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  }
+
+  .appMain {
+    margin-left: 0;
+  }
+
+  .topbar {
+    padding: 0 16px;
+  }
+
+  .appContent,
+  .content {
+    padding: 16px;
+  }
 }

@@ -2,21 +2,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .pageTitle {
-  font-size: 1.875rem;
-  font-weight: 700;
-  color: #111827;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #000000;
 }
 
 .filters {
   margin-bottom: 1.5rem;
-  background-color: #ffffff;
-  border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
-  padding: 1rem;
+  background: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid #EDEDED;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .filtersRow {
@@ -28,78 +30,110 @@
 
 .selectWrapper,
 .inputWrapper {
-  min-width: 150px;
+  min-width: 180px;
 }
 
 .select {
   width: 100%;
-  padding: 0.625rem 0.875rem;
+  padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
-  background-color: #ffffff;
+  letter-spacing: 0;
+  border: 1px solid #8A8886;
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
   cursor: pointer;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.167s cubic-bezier(0.8, 0, 0.2, 1);
+  min-height: 32px;
 }
 
 .select:hover {
-  border-color: #9ca3af;
+  border-color: #605E5C;
+  background-color: #FAFAFA;
 }
 
 .select:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: #0078D4;
+  border-bottom-color: #0078D4;
+  border-bottom-width: 2px;
+  box-shadow: 0 0 0 1px #0078D4;
 }
 
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .statCard {
-  background-color: #ffffff;
-  border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
-  padding: 1.25rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  background: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid #EDEDED;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.167s cubic-bezier(0.8, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 120, 212, 0.04) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.367s cubic-bezier(0.8, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.statCard:hover::before {
+  opacity: 1;
+}
+
+.statCard:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  border-color: #C8C8C8;
 }
 
 .statLabel {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #6b7280;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #605E5C;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
 }
 
 .statValue {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #111827;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #000000;
 }
 
 .tableContainer {
-  background-color: #ffffff;
-  border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid #EDEDED;
   overflow: hidden;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .pagination {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
-  border-top: 1px solid #e5e7eb;
-  background-color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-top: 1px solid #EDEDED;
+  background: #FAFAFA;
 }
 
 .paginationInfo {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: #605E5C;
+  letter-spacing: 0;
 }
 
 .paginationButtons {
@@ -110,8 +144,9 @@
 
 .paginationText {
   font-size: 0.875rem;
-  color: #374151;
-  font-weight: 500;
+  color: #000000;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 @media (max-width: 768px) {

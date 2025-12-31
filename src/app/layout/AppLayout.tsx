@@ -44,6 +44,7 @@ export function AppLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const profile = useAuthStore((state) => state.profile);
+  const user = useAuthStore((state) => state.user);
   const signOut = useAuthStore((state) => state.signOut);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -54,6 +55,10 @@ export function AppLayout() {
   const handleLogout = async () => {
     await signOut();
     navigate('/login');
+  };
+
+  const handleSettingsClick = () => {
+    navigate('/settings');
   };
 
   const handleToggleCollapse = () => {
@@ -86,7 +91,9 @@ export function AppLayout() {
           title={getPageTitle()}
           userName={profile ? `${profile.first_name} ${profile.last_name}` : 'User'}
           userAvatar={profile?.avatar_url || undefined}
+          userEmail={user?.email || undefined}
           onLogout={handleLogout}
+          onSettingsClick={handleSettingsClick}
         />
         <main className={styles.appContent}>
           <Outlet />

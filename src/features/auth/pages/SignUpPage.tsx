@@ -81,7 +81,7 @@ export function SignUpPage({ onSwitchToLogin }: SignUpPageProps) {
                 <path d="M3 9h14M9 3v14" />
               </svg>
             </div>
-            <span className={styles.logoText}>Enterprise</span>
+            <span className={styles.logoText}>Stratify</span>
           </div>
           <h1 className={styles.authTitle}>Create an account</h1>
           <p className={styles.authSubtitle}>Get started with your free account</p>

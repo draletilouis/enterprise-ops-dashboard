@@ -19,7 +19,9 @@ export interface TopbarProps {
   title: string;
   userName?: string;
   userAvatar?: string;
+  userEmail?: string;
   onLogout?: () => void;
+  onSettingsClick?: () => void;
 }
 
 export interface AppLayoutProps {
